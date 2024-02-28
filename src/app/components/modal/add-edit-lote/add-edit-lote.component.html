@@ -1,0 +1,76 @@
+<p-dialog header="{{modalType}} Lote" [(visible)]="displayAddEditModal" [modal]="true" [draggable]="false"
+    [resizable]="false" (onHide)="closeModal()">
+    <form [formGroup]="form" class="lote-form">
+
+        <div class="row">
+            <div class="field">
+                <label class="block" for="nombreLote">Nombre de Lote</label>
+                <input class="p-2 rounded-xl border border-gray-500" type="text" pInputText id="nombreLote"
+                    formControlName="nombreLote">
+                <small class="p-error block" *ngIf="
+    form.controls['nombreLote'].invalid &&
+    form.controls['nombreLote'].dirty
+    ">Campo requerido *</small>
+            </div>
+            <div class="field">
+                <label class="block" for="fechaSiembra">Fecha de Siembra</label>
+                <input class="p-2 rounded-xl  border border-gray-500" type="date" pInputText id="fechaSiembra" formControlName="fechaSiembra"
+                [max]="ahora" [(ngModel)]="fIngreso" (ngModelChange)="cambioFecha">
+                <small class="p-error block" *ngIf="
+            form.controls['fechaSiembra'].invalid &&
+            form.controls['fechaSiembra'].dirty
+            ">Campo Obligatorio*</small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="field">
+                <label class="block" for="numeroAnimales">Número de Animales</label>
+                <input class="p-2 rounded-xl border border-gray-500" name="numeroAnimales" type="text" pInputText
+                    id="numeroAnimales" formControlName="numeroAnimales">
+                <small class="p-error block" *ngIf="
+        form.controls['numeroAnimales'].invalid &&
+        form.controls['numeroAnimales'].dirty
+        ">Campo requerido *</small>
+            </div>
+            <div class="field">
+                <label for="proveedor">Proveedor</label>
+                <select class="p-2 rounded-xl border " class="select" name="proveedor" type="text"
+                    formControlName="proveedor">
+                    <option>Seleccionar una Opcion</option>
+                    <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{proveedor.razonSocial}}</option>
+                </select>
+            </div>
+            <!-- <p-treeSelect class="md:w-20rem w-full" containerStyleClass="w-full" formControlName="proveedor" [options]="selectedLote.proveedor"></p-treeSelect> -->
+
+
+        </div>
+        <div class="row">
+            <div class="field">
+                <label for="especies">Especies</label>
+                <select class="p-2 rounded-xl border  border-gray-500" class="select" name="especies" type="text"
+                    formControlName="especies">
+                    <option>Seleccionar una Opcion</option>
+                    <option *ngFor="let especie of especies" [value]="especie.id">{{especie.nombreEspecie}}</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="unidadProductiva">Unidad Productiva</label>
+                <select class="p-2 rounded-xl border  border-gray-500" class="select" name="unidadProductiva" type="text"
+                    formControlName="unidadProductiva">
+                    <option>Seleccionar una Opcion</option>
+                    <option *ngFor="let unidadP of unidadProductiva" [value]="unidadP.id">{{unidadP.nombreUnidadP}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <ng-template pTemplate="footer">
+            <p-button
+    class="bg-gray-100 rounded-xl py-3 px-2 mr-2"
+    (click)="closeModal()"
+    label="Cancel"
+    styleClass="p-button-text"></p-button>
+        <p-button class="bg-[#EC6708] rounded-xl text-white py-3 px-2" (click)="addEditLote()" label="{{modalType}}" [disabled]="form.invalid"></p-button>
+    </ng-template>
+</p-dialog>

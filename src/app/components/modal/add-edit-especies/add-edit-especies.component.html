@@ -1,0 +1,35 @@
+<p-dialog
+    header="{{modalType}} Especies"
+    [(visible)]="displayAddEditModal"
+    [modal]="true"
+    
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="closeModal()"
+>
+<form [formGroup]="especiesForm" class="especies-form">
+    <div class="row">
+        <div class="field">
+            <label class="block" for="nombreEspecie">Nombre de la Especie</label>
+            <input class="p-2 rounded-xl border border border-gray-500"class="p-2 rounded-xl border border border-gray-500" type="text" pInputText id="nombreEspecie" formControlName="nombreEspecie">
+            <small class="p-error block"
+            *ngIf="
+            especiesForm.controls['nombreEspecie'].invalid &&
+            especiesForm.controls['nombreEspecie'].dirty
+            ">Campo requerido *</small>
+        </div>
+    </div>
+</form>
+<ng-template pTemplate="footer">
+    <p-button
+    class="bg-gray-100 rounded-xl py-3 px-2 mr-2"
+    (click)="closeModal()"
+    label="Cancel"
+    styleClass="p-button-text"></p-button>
+    <p-button
+    class="bg-[#EC6708] rounded-xl text-white py-3 px-2"
+    (click)="addEditEspecies()"
+    label="{{modalType}}"
+    [disabled]="especiesForm.invalid"></p-button>
+</ng-template>
+</p-dialog>

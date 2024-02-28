@@ -1,0 +1,74 @@
+<p-dialog
+    header="{{modalType}} Unidad Productiva"
+    [(visible)]="displayAddEditModal"
+    [modal]="true"
+    
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="closeModal()"
+>
+<form [formGroup]="form" class="unidadP-form">
+    <div class="row">
+        <div class="field">
+            <label class="block" for="nombreUnidadP">Nombre de Unidad Productiva</label>
+            <input class="p-2 rounded-xl border  border-gray-500"type="text" pInputText id="nombreUnidadP" formControlName="nombreUnidadP">
+            <small class="p-error block"
+            *ngIf="
+            form.controls['nombreUnidadP'].invalid &&
+            form.controls['nombreUnidadP'].dirty
+            ">Campo requerido *</small>
+        </div>
+        <div class="field">
+            <label class="block" for="coordenadas">Coordenadas</label>
+            <input class="p-2 rounded-xl border  border-gray-500"type="text" pInputText id="coordenadas" formControlName="coordenadas" (keypress)="onKeyPress($event)">
+            <small class="p-error block"
+            *ngIf="
+            form.controls['coordenadas'].invalid &&
+            form.controls['coordenadas'].dirty
+            ">Campo requerido *</small>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="field">
+            <label class="block" for="area">Área (Mts<sup>2</sup>)</label>
+            <input class="p-2 rounded-xl border  border-gray-500"type="text" pInputText id="area" formControlName="area" (keypress)="onKeyPress($event)">
+            <small class="p-error block"
+            *ngIf="
+            form.controls['area'].invalid &&
+            form.controls['area'].dirty
+            ">Campo requerido *</small>
+        </div>
+        <div class="field">
+            <label class="block" for="profundidad">Profundidad (Mts)</label>
+            <input class="p-2 rounded-xl border  border-gray-500"type="text" pInputText id="profundidad" formControlName="profundidad" (keypress)="onKeyPress($event)" >
+            <small class="p-error block"
+            *ngIf="
+            form.controls['profundidad'].invalid &&
+            form.controls['profundidad'].dirty
+            ">Campo requerido *</small>
+        </div>
+    </div>
+        <div class="field">
+            <label class="block" for="observacion">Observación</label>
+            <textarea class="p-2 rounded-xl border  border-gray-500" rows="5" cols="30" pInputTextarea formControlName="observacion"></textarea>
+            <small class="p-error block"
+            *ngIf="
+            form.controls['observacion'].invalid &&
+            form.controls['observacion'].dirty
+            ">Campo requerido *</small>
+        </div>
+</form>
+<ng-template pTemplate="footer">
+    <p-button
+    class="bg-gray-100 rounded-xl py-3 px-2 mr-2"
+    (click)="closeModal()"
+    label="Cancel"
+    styleClass="p-button-text"></p-button>
+    <p-button
+    class="bg-[#EC6708] rounded-xl text-white py-3 px-2"
+    (click)="addEditUnidadP()"
+    label="{{modalType}}"
+    [disabled]="form.invalid"></p-button>
+</ng-template>
+</p-dialog>
